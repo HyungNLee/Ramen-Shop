@@ -1,17 +1,28 @@
 import React from 'react';
 import Chef from '../models/Chef';
+import Dish from '../models/Dish';
 
 class Game extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      chef: new Chef()
+      chef: new Chef(),
+      dish: null
     }
-    this.addRandomScore = this.addRandomScore.bind(this);
+    this.handleAddRandomScore = this.handleAddRandomScore.bind(this);
+    this.handleNewDish = this.handleNewDish.bind(this);
   }
 
-  addRandomScore() {
-    this.state.chef.addRandomScore();
+  handleAddRandomScore() {
+    let newChef = this.state.chef
+    newChef.addRandomScore();
+    this.setState({chef: newChef});
+  }
+
+  handleNewDish() {
+    let newDish = new Dish();
+    this.setState({dish: newDish});
+    console.log(newDish);
   }
 
   render() {
@@ -29,7 +40,8 @@ class Game extends React.Component {
           <img src={this.state.chef.picture} />
           <p>Score: {this.state.chef.score}</p>
         </div>
-        <button onClick={this.addRandomScore} className='btn btn-info'>TEST ADD RANDOM</button>
+        <button onClick={this.handleAddRandomScore} className='btn btn-info'>TEST ADD RANDOM</button>
+        <button onClick={this.handleNewDish} className='btn btn-info'>NEW DISH</button>
       </div>
     );
   }
