@@ -23,15 +23,12 @@ export default class Chef {
   addNewDishScore(score) {
     this.dishScores.push(score);
     this.calculateScore();
-    console.log(this.dishScores);
-    console.log(`Score: ${this.score}`);
   }
 
   // Temporary Function for testing
   addRandomScore() {
     let randomNumber = (Math.random() * (5 - 1) + 1);
     let roundedNumber = parseFloat((Math.round(randomNumber * 4) / 4).toFixed(2));
-    console.log(`Random = ${randomNumber}, Rounded = ${roundedNumber}`);
     this.addNewDishScore(roundedNumber);
   }
 }

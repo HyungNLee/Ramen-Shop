@@ -27,4 +27,24 @@ export default class Dish {
 
     return newIngredientArray;
   }
+
+  finishDish() {
+    // **Refactored using .map**
+    // let scoreArray = [];
+
+    // this.ingredientArray.forEach(function(ingredient) {
+    //   scoreArray.push(ingredient.getScore());
+    // });
+
+    let scoreArray = this.ingredientArray.map(ingredient => ingredient.getScore());
+
+    let reducer = (accumulator, currentValue) => accumulator + currentValue;
+    let sum = scoreArray.reduce(reducer);
+
+    let finalScore = parseFloat((Math.round((sum / scoreArray.length) * 4) / 4).toFixed(2))
+
+    this.completed = true;
+
+    return finalScore;
+  }
 }
