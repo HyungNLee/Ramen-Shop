@@ -72,7 +72,7 @@ module.exports = {
     new HtmlWebpackPlugin({
       template:'template.ejs',
       appMountId: 'react-app-root',
-      title: 'Ramen-Shop',
+      title: 'Chef Soma Yukihara',
       filename: resolve(__dirname, "build", "index.html"),
     }),
   ]

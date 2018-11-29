@@ -6,22 +6,29 @@ function ScoreView(props) {
     <div className='score-container'>
       <style jsx>{`
         .score-container {
+          margin: 10px auto;
+          padding: 15px;
           text-align: center;
           padding: 10px;
-          color: white;
+          color: black;
           border: 1px solid white;
+          border-radius: 10px;
+          width: 40%;
+          background-color: #ffd73a;
         }
       `}</style>
       <div>
         <h3>Chef Score: {props.chefScore}</h3>
-        <h6>Past Score: {props.score}</h6>
+        {props.dishScores.map((score, index) =>
+          <h6 key={index}>Previous Dish Score: {score}</h6>
+        )}
       </div>
     </div>
   );
 }
 
 ScoreView.propTypes = {
-  score: PropTypes.number.isRequired,
+  dishScores: PropTypes.array.isRequired,
   chefScore: PropTypes.number.isRequired
 };
 

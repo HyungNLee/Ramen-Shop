@@ -1,0 +1,8 @@
+body {
+  height:100vh;
+  min-height:100vh;
+  background-image: url('./assets/Body_BG.jpg');
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-attachment: fixed;
+}

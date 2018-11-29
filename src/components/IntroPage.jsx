@@ -1,5 +1,5 @@
 import React from 'react';
-import BearChef from '../assets/BearChef.jpg';
+import ChefPic from '../assets/Chef.gif';
 import { Link } from 'react-router-dom';
 
 function IntroPage() {
@@ -22,7 +22,7 @@ function IntroPage() {
         <h1>Ramen Shop Adventures</h1>
         <h3>いらっしゃいませ！</h3>
         <h3>어서 오세요!</h3>
-        <img className='chef-picture-styles' src={BearChef} />
+        <img className='chef-picture-styles' src={ChefPic} />
         <Link to='/game'><button className='btn btn-primary'>Start Cooking!</button></Link>
       </div>
     </div>

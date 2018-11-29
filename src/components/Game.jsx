@@ -37,13 +37,10 @@ class Game extends React.Component {
 
     this.ingredientView =
       <div>
-        {this.state.chef.dishScores.map((score, index) =>
-          <ScoreView
-            chefScore = {this.state.chef.score}
-            score={score}
-            key={index}
-          />
-        )}
+        <ScoreView
+          chefScore={this.state.chef.score}
+          dishScores={this.state.chef.dishScores}
+        />
       </div>;
   }
 
@@ -57,7 +54,7 @@ class Game extends React.Component {
     if (this.ingredientTimer == null) {
       this.ingredientTimer = setInterval(() =>
         this.handleUpdateIngredient(),
-      1000
+        1000
       );
     }
   }
@@ -115,9 +112,6 @@ class Game extends React.Component {
       <div className='game-board'>
         <style jsx>{`
           .game-board {
-            border: 1px solid lightgrey;
-            background-color: black;
-            border-radius: 10px;
             padding: 15px;
           }
           .chef-info-container {
@@ -133,10 +127,14 @@ class Game extends React.Component {
             width: 35%;
             border-radius: 50%;
           }
+          .score-style {
+            color: white;
+            text-shadow: 1px 1px 1px #000000;
+          }
         `}</style>
         <div className='chef-info-container'>
           <img src={this.state.chef.picture} />
-          <h3>Score: {this.state.chef.score}/5</h3>
+          <h3 className='score-style'>Score: {this.state.chef.score}/5</h3>
           {this.dishButtonView}
         </div>
         {this.ingredientView}
