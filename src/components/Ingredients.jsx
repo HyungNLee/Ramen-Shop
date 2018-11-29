@@ -5,7 +5,7 @@ import WoodGrain from '../assets/Wood_Grain_BG.jpg';
 function Ingredients(props) {
 
   function onSingleFinishIngredient() {
-    props.onFinishSingleIngredient(props.index);
+    props.onFinishSingleIngredient(props.uniqueId);
   }
 
   let progressBarColor = {
@@ -76,7 +76,7 @@ function Ingredients(props) {
 Ingredients.propTypes = {
   ingredient: PropTypes.object.isRequired,
   onFinishSingleIngredient: PropTypes.func.isRequired,
-  index: PropTypes.number.isRequired
+  uniqueId: PropTypes.string.isRequired
 };
 
 export default Ingredients;

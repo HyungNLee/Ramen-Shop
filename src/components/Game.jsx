@@ -54,7 +54,7 @@ class Game extends React.Component {
     if (this.ingredientTimer == null) {
       this.ingredientTimer = setInterval(() =>
         this.handleUpdateIngredient(),
-        1000
+      1000
       );
     }
   }
@@ -66,9 +66,12 @@ class Game extends React.Component {
 
   handleUpdateIngredient() {
     let newDish = this.state.dish;
-    newDish.ingredientArray.forEach((ingredient) =>
-      ingredient.timerCountdown()
-    );
+    for(let key in newDish.ingredientList) {
+      newDish.ingredientList[key].timerCountdown();
+    }
+    // newDish.ingredientList.forEach((ingredient) =>
+    //   ingredientList[ingredient].timerCountdown()
+    // );
     this.setState({ dish: newDish });
   }
 
@@ -78,9 +81,9 @@ class Game extends React.Component {
     this.handleAddNewDishScore(dishScore);
   }
 
-  handleFinishSingleIngredient(index) {
+  handleFinishSingleIngredient(key) {
     let currentDish = this.state.dish;
-    currentDish.ingredientArray[index].finishIngredient();
+    currentDish.ingredientList[key].finishIngredient();
     this.setState({
       dish: currentDish
     });
@@ -94,12 +97,12 @@ class Game extends React.Component {
     if (this.state.dish != null) {
       this.ingredientView =
         <div className='ingredient-container'>
-          {this.state.dish.ingredientArray.map((ingredient, index) =>
+          {Object.keys(this.state.dish.ingredientList).map((key) =>
             <Ingredients
-              ingredient={ingredient}
+              ingredient={this.state.dish.ingredientList[key]}
               onFinishSingleIngredient={this.handleFinishSingleIngredient}
-              key={index}
-              index={index}
+              key={key}
+              uniqueId={key}
             />
           )}
         </div>;

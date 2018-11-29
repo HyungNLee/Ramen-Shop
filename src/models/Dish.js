@@ -1,13 +1,14 @@
 import Ingredient from './Ingredient';
+import { v4 } from 'uuid';
 
 export default class Dish {
   constructor() {
     this.completed = false;
     this.score = 0;
-    this.ingredientArray = this.initializeIngredientArray();
+    this.ingredientList = this.initializeIngredientList();
   }
 
-  initializeIngredientArray() {
+  initializeIngredientList() {
     let masterIngredientList = [
       'Noodles',
       'Pork',
@@ -16,17 +17,20 @@ export default class Dish {
       'Seaweed'
     ];
 
-    let newIngredientArray = [];
+    let newIngredientList = {};
     let ingredientCount = 3;
 
     for (let i = 1; i <= ingredientCount; i++) {
       let randomIndex = Math.floor(Math.random() * masterIngredientList.length);
       let newIngredient = new Ingredient(masterIngredientList[randomIndex]);
-      newIngredientArray.push(newIngredient);
+
+      newIngredientList = Object.assign({}, newIngredientList, {
+        [v4()]: newIngredient
+      });
+
       masterIngredientList.splice(randomIndex, 1);
     }
-
-    return newIngredientArray;
+    return newIngredientList;
   }
 
   finishDish() {
@@ -37,7 +41,7 @@ export default class Dish {
     //   scoreArray.push(ingredient.getScore());
     // });
 
-    let scoreArray = this.ingredientArray.map(ingredient => ingredient.getScore());
+    let scoreArray = Object.keys(this.ingredientList).map(key => this.ingredientList[key].getScore());
 
     let reducer = (accumulator, currentValue) => accumulator + currentValue;
     let sum = scoreArray.reduce(reducer);

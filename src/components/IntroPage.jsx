@@ -11,7 +11,6 @@ function IntroPage() {
       }
       .intro-body {
         text-align: center;
-        border: 1px solid black;
       }
       .btn {
         display: block;

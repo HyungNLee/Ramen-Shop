@@ -1,5 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import { v4 } from 'uuid';
 
 function ScoreView(props) {
   return (
@@ -19,8 +20,8 @@ function ScoreView(props) {
       `}</style>
       <div>
         <h3>Chef Score: {props.chefScore}</h3>
-        {props.dishScores.map((score, index) =>
-          <h6 key={index}>Previous Dish Score: {score}</h6>
+        {props.dishScores.map((score) =>
+          <h6 key={v4()}>Previous Dish Score: {score}</h6>
         )}
       </div>
     </div>
