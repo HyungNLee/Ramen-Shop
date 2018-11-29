@@ -3,7 +3,7 @@ import React from 'react';
 import { Switch, Route } from 'react-router-dom';
 import IntroPage from './IntroPage';
 import Game from './Game';
-import '../../node_modules/bootstrap/dist/css/bootstrap.min.css'
+import '../../node_modules/bootstrap/dist/css/bootstrap.min.css';
 
 /*
   import { Link } from 'react-router-dom';
@@ -16,7 +16,6 @@ function App() {
       <style jsx>{`
           font-family: Helvetica;
         `}</style>
-      <div className='jumbotron'>Ramen Shop ** REPLACE WITH HEADER COMPONENT **</div>
       <div className='container'>
         <Switch>
           <Route exact path='/' component={IntroPage} />

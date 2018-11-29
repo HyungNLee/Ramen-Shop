@@ -3,6 +3,7 @@ import Chef from '../models/Chef';
 import Dish from '../models/Dish';
 import Ingredients from './Ingredients';
 import ScoreView from './ScoreView';
+import RamenBG from '../assets/Ramen_BG.jpg';
 
 class Game extends React.Component {
   constructor(props) {
@@ -10,10 +11,10 @@ class Game extends React.Component {
     this.state = {
       chef: new Chef(),
       dish: null
-    }
+    };
     this.ingredientTimer = null;
     this.handleAddNewDishScore = this.handleAddNewDishScore.bind(this);
-    this.handleAddRandomScore = this.handleAddRandomScore.bind(this);
+
     this.handleNewDish = this.handleNewDish.bind(this);
     this.handleIngredientTimers = this.handleIngredientTimers.bind(this);
     this.handleUpdateIngredient = this.handleUpdateIngredient.bind(this);
@@ -22,6 +23,7 @@ class Game extends React.Component {
     this.handleFinishSingleIngredient = this.handleFinishSingleIngredient.bind(this);
 
     this.ingredientView = null;
+    this.dishButtonView = null;
   }
 
   handleAddNewDishScore(score) {
@@ -35,20 +37,14 @@ class Game extends React.Component {
 
     this.ingredientView =
       <div>
-        <h3>Chef Score: {this.state.chef.score}</h3>
         {this.state.chef.dishScores.map((score, index) =>
           <ScoreView
+            chefScore = {this.state.chef.score}
             score={score}
             key={index}
           />
         )}
-      </div>
-  }
-
-  handleAddRandomScore() {
-    let newChef = this.state.chef
-    newChef.addRandomScore();
-    this.setState({ chef: newChef });
+      </div>;
   }
 
   handleNewDish() {
@@ -58,14 +54,17 @@ class Game extends React.Component {
   }
 
   handleIngredientTimers() {
-    this.ingredientTimer = setInterval(() =>
-      this.handleUpdateIngredient(),
+    if (this.ingredientTimer == null) {
+      this.ingredientTimer = setInterval(() =>
+        this.handleUpdateIngredient(),
       1000
-    );
+      );
+    }
   }
 
   handleEndIngredientTimer() {
     clearInterval(this.ingredientTimer);
+    this.ingredientTimer = null;
   }
 
   handleUpdateIngredient() {
@@ -84,15 +83,16 @@ class Game extends React.Component {
 
   handleFinishSingleIngredient(index) {
     let currentDish = this.state.dish;
-    console.log(`index: ${index}`);
     currentDish.ingredientArray[index].finishIngredient();
     this.setState({
       dish: currentDish
-    })
-    console.log(currentDish);
+    });
   }
 
   render() {
+    let buttonStyles = {
+      margin: '10px'
+    };
 
     if (this.state.dish != null) {
       this.ingredientView =
@@ -105,25 +105,39 @@ class Game extends React.Component {
               index={index}
             />
           )}
-        </div>
+        </div>;
+      this.dishButtonView = <button style={buttonStyles} onClick={this.handleFinishDish} className='btn btn-info'>Finish Cooking Ramen!</button>;
+    } else {
+      this.dishButtonView = <button style={buttonStyles} onClick={this.handleNewDish} className='btn btn-info'>Start New Dish</button>;
     }
 
     return (
       <div className='game-board'>
         <style jsx>{`
           .game-board {
-            border: 1px solid green;
+            border: 1px solid lightgrey;
+            background-color: black;
+            border-radius: 10px;
+            padding: 15px;
           }
           .chef-info-container {
-            border: 1px solid blue;
+            border: 1px solid #d8302b;
+            border-radius: 15px;
+            padding: 15px;
+            text-align: center;
+            background-image: url(${RamenBG});
+            background-size: cover;
+            background-repeat: no-repeat;
+          }
+          img {
+            width: 35%;
+            border-radius: 50%;
           }
         `}</style>
         <div className='chef-info-container'>
           <img src={this.state.chef.picture} />
-          <p>Score: {this.state.chef.score}</p>
-          <button onClick={this.handleFinishDish} className='btn btn-info'>TEST ADD CURRENT SCORE</button>
-          <button onClick={this.handleAddRandomScore} className='btn btn-info'>TEST ADD RANDOM</button>
-          <button onClick={this.handleNewDish} className='btn btn-info'>NEW DISH</button>
+          <h3>Score: {this.state.chef.score}/5</h3>
+          {this.dishButtonView}
         </div>
         {this.ingredientView}
       </div>

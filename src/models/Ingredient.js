@@ -59,7 +59,7 @@ export default class Ingredient {
       'Perfectly Cooked': 5, 
       'Overcooked': 4, 
       'Burnt': 1
-    }
+    };
 
     this.completed = true;
     this.score = scorePairs[this.status];

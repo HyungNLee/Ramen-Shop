@@ -1,10 +1,10 @@
-import BearChef from '../assets/BearChef.jpg';
+import ChefPic from '../assets/Chef.gif';
 
 export default class Chef {
   constructor() {
     this.dishScores = [];
     this.score = 0;
-    this.picture = BearChef;
+    this.picture = ChefPic;
   }
 
   calculateScore() {
@@ -25,10 +25,4 @@ export default class Chef {
     this.calculateScore();
   }
 
-  // Temporary Function for testing
-  addRandomScore() {
-    let randomNumber = (Math.random() * (5 - 1) + 1);
-    let roundedNumber = parseFloat((Math.round(randomNumber * 4) / 4).toFixed(2));
-    this.addNewDishScore(roundedNumber);
-  }
 }

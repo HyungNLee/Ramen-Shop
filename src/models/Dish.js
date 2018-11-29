@@ -17,8 +17,9 @@ export default class Dish {
     ];
 
     let newIngredientArray = [];
+    let ingredientCount = 3;
 
-    for (let i = 1; i <=3; i++) {
+    for (let i = 1; i <= ingredientCount; i++) {
       let randomIndex = Math.floor(Math.random() * masterIngredientList.length);
       let newIngredient = new Ingredient(masterIngredientList[randomIndex]);
       newIngredientArray.push(newIngredient);
@@ -41,7 +42,7 @@ export default class Dish {
     let reducer = (accumulator, currentValue) => accumulator + currentValue;
     let sum = scoreArray.reduce(reducer);
 
-    let finalScore = parseFloat((Math.round((sum / scoreArray.length) * 4) / 4).toFixed(2))
+    let finalScore = parseFloat((Math.round((sum / scoreArray.length) * 4) / 4).toFixed(2));
 
     this.completed = true;
 
