@@ -19,6 +19,7 @@ class Game extends React.Component {
     this.handleUpdateIngredient = this.handleUpdateIngredient.bind(this);
     this.handleEndIngredientTimer = this.handleEndIngredientTimer.bind(this);
     this.handleFinishDish = this.handleFinishDish.bind(this);
+    this.handleFinishSingleIngredient = this.handleFinishSingleIngredient.bind(this);
 
     this.ingredientView = null;
   }
@@ -81,6 +82,16 @@ class Game extends React.Component {
     this.handleAddNewDishScore(dishScore);
   }
 
+  handleFinishSingleIngredient(index) {
+    let currentDish = this.state.dish;
+    console.log(`index: ${index}`);
+    currentDish.ingredientArray[index].finishIngredient();
+    this.setState({
+      dish: currentDish
+    })
+    console.log(currentDish);
+  }
+
   render() {
 
     if (this.state.dish != null) {
@@ -89,7 +100,9 @@ class Game extends React.Component {
           {this.state.dish.ingredientArray.map((ingredient, index) =>
             <Ingredients
               ingredient={ingredient}
+              onFinishSingleIngredient={this.handleFinishSingleIngredient}
               key={index}
+              index={index}
             />
           )}
         </div>
